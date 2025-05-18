@@ -1,4 +1,5 @@
-tconst fs = require('fs')
+const fs = require('fs');
+
 const crafter = require('./crafter');
 //console.log(process.argv);
 
