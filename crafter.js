@@ -1,4 +1,4 @@
-const mineflayer = require('mineflayer');  
+const mineflayer = require('mineflayer');   
 const watchdog = require('mineflayer-simple-watchdog');
 const inventory = require('./utils/inventory');
 const Vec3 = require('vec3');
@@ -167,7 +167,7 @@ async function botCraftOnce(bot, config) {
             continue;
         }
         let amountInInventory = inventory.countItemById(bot, recipeItem.id);
-        let withdrawAmount = (-(recipeItem.count * 8)) - amountInInventory;  // 8 ta netherite ingot uchun hisoblash
+        let withdrawAmount = (-(recipeItem.count * 7)) - amountInInventory;  // 8 ta emerald block uchun hisoblash
         if (withdrawAmount > 0) {
             console.log(`Kerakli material: ${withdrawAmount} ta ${mcData.items[recipeItem.id].name} kerak.`);
 
@@ -186,8 +186,8 @@ async function botCraftOnce(bot, config) {
 
     // Craftingni boshlash
     console.log("Crafting...");
-    let craftingAmount = 8;  // 8 ta netherite ingotni crafting qilish
-    console.log(`Crafting ${craftingAmount} netherite_ingot...`);
+    let craftingAmount = 7;  // 8 ta emerald block crafting qilish
+    console.log(`Crafting ${craftingAmount} emerald_block...`);
 
     let complete = false;
     if (craftingTable) {
@@ -204,21 +204,18 @@ async function botCraftOnce(bot, config) {
     setTimeout(reopen, 15000);
 
     try {
-        await bot.craft(recipe, craftingAmount, craftingTable);  // 8 ta netherite ingotni crafting qilish
+        await bot.craft(recipe, craftingAmount, craftingTable);  // 8 ta emerald block crafting qilish
     } catch (err) {
         console.log('Craftingda xatolik yuz berdi:', err);
         await botStoreItem(bot, itemId, bot.crafter.outputPosition);
     }
     complete = true;
     await sleep(200);
-    console.log(`${craftingAmount} ta netherite_ingot crafting qilindi, natijalarni saqlamoq...`);
+    console.log(`${craftingAmount} ta emerald_block crafting qilindi, natijalarni saqlamoq...`);
     await botStoreItem(bot, itemId, bot.crafter.outputPosition);
 
     return true;
 }
-
-
-
 
 async function botTakeItem(bot, itemId, amount, chestPosition) {
     bot.watchdog.kick();
